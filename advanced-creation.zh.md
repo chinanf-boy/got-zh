@@ -8,12 +8,12 @@
 
 提供设置，配置一个新的`got`实例。您可以使用实例上的`.defaults`属性，访问已解决的选项.
 
-**注意:**与`got.extend()`相反,此方法没有默认值.
+**注意:** 与`got.extend()`相反,此方法没有默认值.
 
 ##### [options](readme.md#options)
 
 要从父级继承,请将其设置为`got.defaults.options`或使用[`got.mergeOptions(defaults.options, options)`](readme.md#gotmergeoptionsparentoptions-newoptions).<br>
-**注意**:避免使用[对象传播-...语法糖](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals),因为它不能递归工作.
+**注意** : 避免使用[对象传播-...语法糖](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals),因为它不能递归工作.
 
 ##### mutableDefaults
 
@@ -35,7 +35,7 @@
 
 ###### [options](readme.md#options)
 
-**注意:**这些是[规范的-normalized](source/normalize-arguments.js)选项.
+**注意:** 这些是[规范的-normalized](source/normalize-arguments.js)选项.
 
 ###### next()
 
@@ -242,7 +242,7 @@ const signRequest = got.extend({
 
 如果这些实例是不同的模块,并且您不想重写它们,请使用`got.mergeInstances()`.
 
-**注意**:而`noUserAgent`实例必须放在合并链的末尾，当按顺序合并时。因为其他都有`user-agent`.
+**注意** : 而`noUserAgent`实例必须放在合并链的末尾，当按顺序合并时。因为其他都有`user-agent`.
 
 ```js
 const merged = got.mergeInstances(controlRedirects, limitDownloadUpload, httpbin, signRequest, noUserAgent);

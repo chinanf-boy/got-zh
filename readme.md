@@ -47,7 +47,7 @@
 <div align="center">
 	<br>
 	<br>
-	<img width="360" src="media/logo.svg" alt="Got">
+	<img width="360" src="https://github.com/sindresorhus/got/blob/master/media/logo.svg" alt="Got">
 	<br>
 	<br>
 	<br>
@@ -142,8 +142,8 @@ fs.createReadStream('index.html').pipe(got.stream.post('sindresorhus.com'));
 
 参数 | 
 ---|---
- [url](#url) |
- [options](#options) |
+[url](#url) |
+[options](#options) |
 
 ##### url
 
@@ -161,32 +161,7 @@ fs.createReadStream('index.html').pipe(got.stream.post('sindresorhus.com'));
 类型: | `Object`
 ---|---
 
-参数 |
----|---
-[Streams](#streams) |
-[baseUrl](#baseurl) |
-[headers](#headers) |
-[stream](#stream) |
-[body](#body) |
-[cookieJar](#cookiejar) |
-[encoding](#encoding) |
-[form](#form) |
-[json](#json) |
-[query](#query) |
-[timeout](#timeout) |
-[retry](#retry) |
-[followRedirect](#followredirect) |
-[decompress](#decompress) |
-[cache](#cache) |
-[request](#request) |
-[useElectronNet](#useelectronnet) |
-[throwHttpErrors](#throwhttperrors) |
-[agent](#agent) |
-[hooks](#hooks) |
-[hooks.beforeRequest](#hooks.beforerequest) |
-[hooks.beforeRedirect](#hooks.beforeredirect) |
-[hooks.beforeRetry](#hooks.beforeretry) |
-[hooks.afterResponse](#hooks.afterresponse) |
+参数 |> [Streams](#streams) [baseUrl](#baseurl) [headers](#headers) [stream](#stream) [body](#body) [cookieJar](#cookiejar) [encoding](#encoding) [form](#form) [json](#json) [query](#query) [timeout](#timeout) [retry](#retry) [followRedirect](#followredirect) [decompress](#decompress) [cache](#cache) [request](#request) [useElectronNet](#useelectronnet) [throwHttpErrors](#throwhttperrors) [agent](#agent) [hooks](#hooks) [hooks.beforeRequest](#hooks.beforerequest) [hooks.beforeRedirect](#hooks.beforeredirect) [hooks.beforeRetry](#hooks.beforeretry) [hooks.afterResponse](#hooks.afterresponse)
 
 任何一个[`https.request`](https://nodejs.org/api/https.html#https_https_request_options_callback)的选项.
 
@@ -290,8 +265,7 @@ Cookie支持.您不必关心解析或如何存储它们.[例子.](#cookies)
 
 ###### query
 
-类型:| `string` `Object<string, string|number>` 
-[`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
+类型:| `string` `Object<string, string|number>` [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
 ---|---
 
 添加到请求URL的查询字符串。这将覆盖`url`的查询字符串.
@@ -559,15 +533,14 @@ const instance = got.extend({
 
 响应对象通常是一个[Node.js HTTP响应流](https://nodejs.org/api/http.html#http_class_http_incomingmessage)但是,如果从缓存返回，那它会是一个[类似响应的对象](https://github.com/lukechilds/responselike)和行为方式相同.
 
-参数|
----|---
+**参数** |>
 [body](#body-1)
 [url](#url-1)
-[requestUrl](#requestUrl)
+[requestUrl](#requesturl)
 [timings](#timings)
-[fromCache](#fromCache)
-[redirectUrls](#redirectUrls)
-[retryCount](#retryCount)
+[fromCache](#fromcache)
+[redirectUrls](#redirecturls)
+[retryCount](#retrycount)
 
 
 
