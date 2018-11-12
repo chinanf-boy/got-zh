@@ -265,7 +265,7 @@ Cookie支持.您不必关心解析或如何存储它们.[例子.](#cookies)
 
 ###### query
 
-类型:| `string` `Object<string, string|number>` [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
+类型: | `string` `Object<string, string\|number>` [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
 ---|---
 
 添加到请求URL的查询字符串。这将覆盖`url`的查询字符串.
@@ -759,8 +759,8 @@ Options会深度合并到新对象。每个字段名的确定步骤如下:
 ## Errors
 
 每个错误包含(如果可用)的属性字段 |
----|---
-`body`,
+---|
+`body`,|
 `statusCode`,|
 `statusMessage`,|
 `host`,|
