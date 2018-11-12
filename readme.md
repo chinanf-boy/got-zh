@@ -18,7 +18,7 @@
 
 ---
 
-## 校对 🀄️
+## 校对 ✅
 
 <!-- doc-templite START generated -->
 <!-- repo = 'sindresorhus/got' -->
@@ -32,7 +32,6 @@
 [commit]: https://github.com/sindresorhus/got/tree/7f18ef397341214d9f46d774f69e65d6cdd95494
 
 <!-- doc-templite END generated -->
-
 
 ### 贡献
 
@@ -70,22 +69,22 @@ Got是Node.js的请求库。对于浏览器的请求,我们建议[ky](https://gi
 
 ## Highlights
 
--  [ ] [Promise 和 Streams API](#api)
--  [ ] [请求取消](#aborting-the-request)
--  [ ] [符合RFC的缓存](#cache-adapters)
--  [ ] [遵循重定向](#followredirect)
--  [ ] [失败时重试](#retry)
--  [ ] [进展事件](#onuploadprogress-progress)
--  [ ] [处理gzip / deflate](#decompress)
--  [ ] [超时处理](#timeout)
--  [ ] [元数据错误](#errors)
--  [ ] [JSON模式](#json)
--  [ ] [WHATWG URL支持](#url)
--  [ ] [钩](https://github.com/sindresorhus/got#hooks)
--  [ ] [具有自定义默认值的实例](#instances)
--  [ ] [可组合](advanced-creation.md#merging-instances)
--  [ ] [电子支持](#useelectronnet)
--  [ ] [由~2000包和~500K repos使用](https://github.com/sindresorhus/got/network/dependents)
+-  [x] [Promise 和 Streams API](#api)
+-  [x] [请求取消](#aborting-the-request)
+-  [x] [符合RFC的缓存](#cache-adapters)
+-  [x] [遵循重定向](#followredirect)
+-  [x] [失败时重试](#retry)
+-  [x] [进展事件](#onuploadprogress-progress)
+-  [x] [处理 gzip/deflate](#decompress)
+-  [x] [超时处理](#timeout)
+-  [x] [元数据错误](#errors)
+-  [x] [JSON模式](#json)
+-  [x] [WHATWG URL支持](#url)
+-  [x] [钩子](https://github.com/sindresorhus/got#hooks)
+-  [x] [具有自定义默认值的实例](#instances)
+-  [x] [可组合](advanced-creation.zh.md#merging-instances)
+-  [x] [Electron支持](#useelectronnet)
+-  [由~2000包和~500K repos使用](https://github.com/sindresorhus/got/network/dependents)
 -   积极维护
 
 [了解Got,如何与其他HTTP库进行比较](#comparison)
@@ -287,7 +286,7 @@ Cookie支持.您不必关心解析或如何存储它们.[例子.](#cookies)
 
 用`JSON.parse`解析响应主体，并设置`accept`标题为`application/json`。如果与`form`选项一起使用,`body`将字符串化为查询字符串,并将响应解析为JSON.
 
-`body`必须是普通对象或数组,和将对其进行字符串化.
+`body`必须是普通对象或数组,和能对其进行字符串化.
 
 ###### query
 
@@ -462,7 +461,7 @@ got('sindresorhus.com', {
 ---|---
 默认:|`[]`
 
-调用[标准的](source/normalize-arguments.js) [请求选项](#options)。在发送请求之前,不会对请求进行进一步更改。这对结合[`got.extend()`](#instances)和[`got.create()`](advanced-creation.md)使用，特别有用，当您想要创建一个API客户端时,例如,使用HMAC签名.
+调用[标准的](source/normalize-arguments.js) [请求选项](#options)。在发送请求之前,不会对请求进行进一步更改。这对结合[`got.extend()`](#instances)和[`got.create()`](advanced-creation.zh.md)使用，特别有用，当您想要创建一个API客户端时,例如,使用HMAC签名.
 
 见[AWS部分](#aws)举的例子.
 
@@ -756,11 +755,11 @@ client.get('/demo');
 })();
 ```
 
-*需要更多控制Got的行为? 看看[`got.create()`](advanced-creation.md).*
+*需要更多控制Got的行为? 看看[`got.create()`](advanced-creation.zh.md).*
 
 #### got.mergeOptions(parentOptions, newOptions)
 
-扩展父选项。避免使用[对象传播](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals)，因为它不能递归地工作:
+扩展父选项。避免使用[对象传播...](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals)，因为它不能递归工作:
 
 ```js
 const a = {headers: {cat: 'meow', wolf: ['bark', 'wrrr']}};
@@ -772,13 +771,17 @@ got.mergeOptions(a, b)  // => {headers: {cat: 'meow', cow: 'moo', wolf: ['auuu']
 
 <!-- HERE -->
 
-Options会深度合并到新对象.每个字段名确定如下:
+Options会深度合并到新对象。每个字段名的确定步骤如下: 
 
--   如果新属性设置为`undefined`它保留了旧的.
--   如果父属性是.的实例`URL`而新的价值是`string`要么`URL`,创建一个新的URL实例:[`new URL(new, parent)`](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL#Syntax).
--   如果新房产是普通`Object`: - 如果父属性是普通的`Object`同样,两个值都递归地合并为一个新的`Object`.- 否则,只会深入克隆新值.
--   如果新属性是`Array`,它用新属性的深层克隆覆盖旧的.
--   否则,新值将分配给密钥.
+> `a`为旧/父的，`b`为新的。
+
+-   如果新属性设置为`undefined`，保留了旧的.
+-   如果父属性是`URL`的实例，而新的值是`string`或者`URL`, 那就创建一个新的URL实例:[`new URL(new, parent)`](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL#Syntax).
+-   如果新属性是普通`Object`: 
+	- 如果父属性也是普通的`Object`, 那两个值递归合并为一个新的`Object`.
+	- 否则,只会深拷贝新值.
+-   如果新属性是`Array`,它用新属性的深拷贝覆盖旧的.
+-   否则,新值分配给对应的字段就好了。
 
 #### got.defaults
 
@@ -789,9 +792,22 @@ Options会深度合并到新对象.每个字段名确定如下:
 
 ## Errors
 
-每个错误包含(如果可用)`body`,`statusCode`,`statusMessage`,`host`,`hostname`,`method`,`path`,`protocol`和`url`属性使调试更容易.
+每个错误包含(如果可用)的属性字段 |
+---|---
+`body`,
+`statusCode`,|
+`statusMessage`,|
+`host`,|
+`hostname`|
+`method`,|
+`path`,|
+`protocol`|
+`url`|
 
-在Promise模式下,`response`附加到错误.
+使调试更容易.
+
+在Promise模式下,
+`response`也附加到错误.
 
 #### got.CacheError
 
@@ -799,7 +815,7 @@ Options会深度合并到新对象.每个字段名确定如下:
 
 #### got.RequestError
 
-请求失败时包含一个`code`具有错误类代码的属性,如`ECONNREFUSED`.
+请求失败时，包含一个具有错误类代码的`code`属性,如`ECONNREFUSED`.
 
 #### got.ReadError
 
@@ -807,31 +823,31 @@ Options会深度合并到新对象.每个字段名确定如下:
 
 #### got.ParseError
 
-什么时候`json`选项已启用,服务器响应代码为2xx,和`JSON.parse`失败.
+当`json`选项已启用,服务器响应代码为2xx,和`JSON.parse`失败.
 
 #### got.HTTPError
 
-当服务器响应代码不是2xx时.包括`statusCode`,`statusMessage`,和`redirectUrls`属性.
+当服务器响应代码不是2xx时，包括`statusCode`,`statusMessage`,和`redirectUrls`属性.
 
 #### got.MaxRedirectsError
 
-当服务器重定向您十次以上时.包括一个`redirectUrls`属性,这是一个URL的数组被重定向到放弃之前.
+当服务器重定向您十次以上时，包括一个`redirectUrls`属性,这是在放弃之前，重定向的一个URL数组.
 
 #### got.UnsupportedProtocolError
 
-给定不支持的协议时.
+不支持的协议时.
 
 #### got.CancelError
 
-请求中止时`.cancel()`.
+请求被`.cancel()`中止时.
 
 #### got.TimeoutError
 
-当请求因a而中止时[超时](#timeout)
+当请求因一个[超时](#timeout)而中止时
 
 ## Aborting the request
 
-Got返回的承诺有一个[`.cancel()`](https://github.com/sindresorhus/p-cancelable)调用时,中止请求的方法.
+Got返回的Promise有一个[`.cancel()`](https://github.com/sindresorhus/p-cancelable)。当调用时,会中止请求.
 
 ```js
 (async () => {
@@ -862,9 +878,9 @@ Got返回的承诺有一个[`.cancel()`](https://github.com/sindresorhus/p-cance
 
 ## Cache
 
-有工具[RFC 7234](http://httpwg.org/specs/rfc7234.html)兼容的HTTP缓存,可以在内存中开箱即用,并且可以使用各种存储适配器轻松插入.直接从缓存提供新缓存条目,并使用缓存条目重新验证过时缓存条目`If-None-Match`/`If-Modified-Since`头.您可以在中阅读有关基础缓存行为的更多信息[`cacheable-request`文件](https://github.com/lukechilds/cacheable-request).
+Got实现了[RFC 7234](http://httpwg.org/specs/rfc7234.html)兼容的HTTP缓存,可以在内存中开箱即用,并且可以使用各种存储适配器轻松插入。直接从缓存提供新缓存项,并使用`If-None-Match`/`If-Modified-Since`头重新验证过时的缓存项。您可以在[`cacheable-request`文件](https://github.com/lukechilds/cacheable-request)中，阅读有关基本缓存行为的更多信息.
 
-您可以使用JavaScript`Map`键入内存缓存:
+您可以使用JavaScript`Map`类型，作为内存缓存:
 
 ```js
 const got = require('got');
@@ -881,7 +897,7 @@ const map = new Map();
 })();
 ```
 
-Got了用途[Keyv](https://github.com/lukechilds/keyv)内部支持各种存储适配器.对于更具伸缩性的东西,你可以使用[官方Keyv存储适配器](https://github.com/lukechilds/keyv#official-storage-adapters):
+Got 内部使用[Keyv](https://github.com/lukechilds/keyv)支持各种存储适配器。对于更多伸缩性,你可以使用[官方Keyv存储适配器](https://github.com/lukechilds/keyv#official-storage-adapters):
 
 ```
 $ npm install @keyv/redis
@@ -896,9 +912,9 @@ const redis = new KeyvRedis('redis://user:pass@localhost:6379');
 got('sindresorhus.com', {cache: redis});
 ```
 
-Got了支持Map API之后的任何内容,因此可以轻松编写自己的存储适配器或使用第三方解决方案.
+Got提供了Map API内容的支持,因此可以轻松编写自己的存储适配器或使用第三方解决方案.
 
-例如,以下是所有有效的存储适配器:
+例如,以下所有，都是有效的存储适配器:
 
 ```js
 const storageAdapter = new Map();
@@ -911,11 +927,11 @@ const storageAdapter = new QuickLRU({maxSize: 1000});
 got('sindresorhus.com', {cache: storageAdapter});
 ```
 
-查看[KEV文档](https://github.com/lukechilds/keyv)有关如何使用存储适配器的更多信息.
+查看[keyv文档](https://github.com/lukechilds/keyv)有关如何使用存储适配器的更多信息.
 
 ## Proxies
 
-你可以使用[`tunnel`](https://github.com/koichik/node-tunnel)包装与`agent`与代理一起工作的选项:
+你可以使用[`tunnel`](https://github.com/koichik/node-tunnel)包,加上`agent`与代理一起工作:
 
 ```js
 const got = require('got');
@@ -930,11 +946,11 @@ got('sindresorhus.com', {
 });
 ```
 
-退房[`global-tunnel`](https://github.com/np-maintain/global-tunnel)如果您想为应用程序中的所有HTTP/HTTPS流量配置代理支持.
+查看下[`global-tunnel`](https://github.com/np-maintain/global-tunnel)，如果您想为应用程序中的所有HTTP/HTTPS流量配置代理支持.
 
 ## Cookies
 
-你可以使用[`tough-cookie`](https://github.com/salesforce/tough-cookie)包裹:
+你可以使用[`tough-cookie`](https://github.com/salesforce/tough-cookie)包:
 
 ```js
 const got = require('got');
@@ -948,7 +964,7 @@ got('google.com', {cookieJar});
 
 ## Form data
 
-你可以使用[`form-data`](https://github.com/form-data/form-data)用表单数据创建POST请求:
+你可以使用[`form-data`](https://github.com/form-data/form-data)，用表单数据创建POST请求:
 
 ```js
 const fs = require('fs');
@@ -965,7 +981,7 @@ got.post('google.com', {
 
 ## OAuth
 
-你可以使用[`oauth-1.0a`](https://github.com/ddo/oauth-1.0a)包创建签名的OAuthe请求:
+你可以使用[`oauth-1.0a`](https://github.com/ddo/oauth-1.0a)包，创建签名的OAuth请求:
 
 ```js
 const got = require('got');
@@ -996,11 +1012,11 @@ got(url, {
 
 ## Unix Domain Sockets
 
-请求也可以通过[UNIX域套接字](http://serverfault.com/questions/124517/whats-the-difference-between-unix-socket-and-tcp-ip-socket). 使用以下URL方案:`PROTOCOL://unix:SOCKET:PATH`.
+请求也可以通过[UNIX域名套接字](http://serverfault.com/questions/124517/whats-the-difference-between-unix-socket-and-tcp-ip-socket)发送出去。 使用以下URL方案:`PROTOCOL://unix:SOCKET:PATH`.
 
 -   `PROTOCOL` - `http`或`https` *(可选)*
--   `SOCKET`-一个UNIX域套接字的绝对路径,例如:`/var/run/docker.sock`
--   `PATH`-请求路径,例如:`/v2/keys`
+-   `SOCKET`- 一个UNIX域名套接字的绝对路径,例如:`/var/run/docker.sock`
+-   `PATH`- 请求路径,例如:`/v2/keys`
 
 ```js
 got('http://unix:/var/run/docker.sock:/containers/json');
@@ -1011,7 +1027,7 @@ got('unix:/var/run/docker.sock:/containers/json');
 
 ## AWS
 
-对AWS服务的请求需要签署他们的标头.这可以通过使用[`aws4`](https://www.npmjs.com/package/aws4)包裹.这是一个查询AN的示例.["API网关"](https://docs.aws.amazon.com/apigateway/api-reference/signing-requests/)用已签名的请求.
+对AWS服务的请求，需要签署他们的标头(headers)。这可以通过使用[`aws4`](https://www.npmjs.com/package/aws4)包。这是一个用已签名的请求，查询["API网关"](https://docs.aws.amazon.com/apigateway/api-reference/signing-requests/)的示例..
 
 ```js
 const AWS = require('aws-sdk');
@@ -1079,7 +1095,7 @@ const createTestServer = require('create-test-server');
 
 ### User Agent
 
-这是个好主意.`'user-agent'`头,因此提供者可以更容易地看到它们的资源是如何使用的.默认情况下,它是这个回购的URL.您可以通过将该头设置为`null`.
+设置`'user-agent'`头是个好主意，因此提供者可以更容易地看到它们的资源是如何使用的。默认情况下,它是指向这个存储库的URL。当然您也可以设置为`null`禁用.
 
 ```js
 const got = require('got');
@@ -1100,13 +1116,13 @@ got('sindresorhus.com', {
 
 ### 304 Responses
 
-记住,如果你发送一个`if-modified-since`标题和接收`304 Not Modified`反应,身体就会空虚.缓存和检索正文内容是您的职责.
+记住,如果你发送一个`if-modified-since`标题。和接收到了`304 Not Modified`响应,主体-body就会是空的。缓存和检索主体内容是您的职责.
 
 ### Custom endpoints
 
-使用`got.extend()`让它更好地与REST API一起工作.特别是如果你使用`baseUrl`选择权.
+使用`got.extend()`让它更好地与REST API一起工作。特别是你使用了`baseUrl`选项.
 
-**注:**不惑[`got.create()`](advanced-creation.md),它没有默认值.
+**注:**不要对[`got.create()`](advanced-creation.zh.md)感到疑惑,它没有默认值.
 
 ```js
 const got = require('got');
@@ -1126,11 +1142,11 @@ const custom = got.extend({
 })();
 ```
 
-*需要将一些实例合并为单个实例吗?退房[`got.mergeInstances()`](advanced-creation.md#merging-instances).*
+*需要将一些实例合并为单个实例吗? 查看[`got.mergeInstances()`](advanced-creation.zh.md#merging-instances).*
 
 ### Experimental HTTP2 support
 
-GET提供了使用HTTP2的实验支持[`http2-wrapper`](https://github.com/szmarczak/http2-wrapper)包裹:
+GET提供了[`http2-wrapper`](https://github.com/szmarczak/http2-wrapper)包，使用HTTP2的实验支持:
 
 ```js
 const got = require('got');
@@ -1146,37 +1162,37 @@ const h2got = got.extend({request});
 
 ## Comparison
 
-|  | `got` | `request` | `node-fetch` | `axios` |
-| --- | :---: | :-------: | :----------: | :-----: |
-| HTTP/2支持 | γ | γ | γ | γ |
-| 浏览器支持 | γ | γ | \* \* | γ |
-| 电子支持 | γ | γ | γ | γ |
-| 承诺API | γ | γ | γ | γ |
-| 新一代推送接口 | γ | γ | 仅限于JS | γ |
-| 请求取消 | γ | γ | γ | γ |
-| 符合RFC的高速缓存 | γ | γ | γ | γ |
-| 饼干(盒外) | γ | γ | γ | γ |
-| 跟随重定向 | γ | γ | γ | γ |
-| 重试失败 | γ | γ | γ | γ |
-| 进步事件 | γ | γ | γ | 仅浏览器 |
-| 处理GZIP/放气 | γ | γ | γ | γ |
-| 超时超时 | γ | γ | γ | γ |
-| 计时 | γ | γ | γ | γ |
-| 元数据错误 | γ | γ | γ | γ |
-| JSON模式 | γ | γ | γ | γ |
-| 自定义缺省值 | γ | γ | γ | γ |
-| 可合成的 | γ | γ | γ | γ |
-| 钩子 | γ | γ | γ | γ |
-| 问题公开 | ![][gio] | ![][rio] | ![][nio] | ![][aio] |
-| 关闭问题 | ![][gic] | ![][ric] | ![][nic] | ![][aic] |
-| 下载 | ![][gd] | ![][rd] | ![][nd] | ![][ad] |
-| 新闻报道 | ![][gc] | ![][rc] | ![][nc] | ![][ac] |
-| 建造 | ![][gb] | ![][rb] | ![][nb] | ![][ab] |
-| 漏洞 | ![][gbg] | ![][rbg] | ![][nbg] | ![][abg] |
-| 家属 | ![][gdp] | ![][rdp] | ![][ndp] | ![][adp] |
-| 安装尺寸 | ![][gis] | ![][ris] | ![][nis] | ![][ais] |
+|                       |     `got`    |   `request`  | `node-fetch` |    `axios`   |
+|-----------------------|:------------:|:------------:|:------------:|:------------:|
+| HTTP/2 支持        |      ❔      |       ✖      |       ✖      |       ✖      |
+| Browser 支持       |       ✖      |       ✖      |       ✔*     |       ✔      |
+| Electron 支持      |       ✔      |       ✖      |       ✖      |       ✖      |
+| Promise API           |       ✔      |       ✔      |       ✔      |       ✔      |
+| Stream API            |       ✔      |       ✔      | Node.js only |       ✖      |
+| Request 中止   |       ✔      |       ✖      |       ✖      |       ✔      |
+| RFC compliant caching |       ✔      |       ✖      |       ✖      |       ✖      |
+| Cookies (out-of-box)  |       ✔      |       ✔      |       ✖      |       ✖      |
+| 跟踪 重定向网址     |       ✔      |       ✔      |       ✔      |       ✔      |
+| 失败重试   |       ✔      |       ✖      |       ✖      |       ✖      |
+| Progress 事件       |       ✔      |       ✖      |       ✖      | Browser only |
+| 可控 gzip/deflate  |       ✔      |       ✔      |       ✔      |       ✔      |
+| timeouts  优化   |       ✔      |       ✖      |       ✖      |       ✖      |
+| Timings               |       ✔      |       ✔      |       ✖      |       ✖      |
+| Errors 元数据  |       ✔      |       ✖      |       ✖      |       ✔      |
+| JSON 模式             |       ✔      |       ✔      |       ✖      |       ✔      |
+| Custom defaults       |       ✔      |       ✔      |       ✖      |       ✔      |
+| Composable            |       ✔      |       ✖      |       ✖      |       ✖      |
+| Hooks                 |       ✔      |       ✖      |       ✖      |       ✔      |
+| Issues open           |   ![][gio]   |   ![][rio]   |   ![][nio]   |   ![][aio]   |
+| Issues closed         |   ![][gic]   |   ![][ric]   |   ![][nic]   |   ![][aic]   |
+| Downloads             |    ![][gd]   |    ![][rd]   |    ![][nd]   |    ![][ad]   |
+| Coverage              |    ![][gc]   |    ![][rc]   |    ![][nc]   |    ![][ac]   |
+| Build                 |    ![][gb]   |    ![][rb]   |    ![][nb]   |    ![][ab]   |
+| Bugs                  |   ![][gbg]   |   ![][rbg]   |   ![][nbg]   |   ![][abg]   |
+| Dependents            |   ![][gdp]   |   ![][rdp]   |   ![][ndp]   |   ![][adp]   |
+| Install size          |   ![][gis]   |   ![][ris]   |   ![][nis]   |   ![][ais]   |
 
-\*它几乎与浏览器兼容`fetch`应用程序编程接口.<br>②实验支持.
+\*它几乎与浏览器`fetch` API兼容.<br> ❔ 实验支持.
 
 <!-- ISSUES OPEN -->
 
@@ -1260,17 +1276,17 @@ const h2got = got.extend({request});
 
 ## Related
 
--   [生长激素释放激素](https://github.com/sindresorhus/gh-got)-方便的包装器与GITHUB API交互
--   [GLGot](https://github.com/singapore/gl-got)-方便的包装器与GITLAB API交互
--   [特拉维斯Got](https://github.com/samverschueren/travis-got)-方便的包装器与特拉维斯API交互
--   [Got了](https://github.com/kevva/graphql-got)-方便包装与GraphQL互动
--   [GotQL](https://github.com/khaosdoctor/gotql)-使用JSON解析查询代替字符串来获得与Gracql进行交互的便利包装器
+- [gh-got](https://github.com/sindresorhus/gh-got) - Got 便利包，与GitHub API交互
+- [gl-got](https://github.com/singapore/gl-got) - Got 便利包，与Gitlab API交互
+- [travis-got](https://github.com/samverschueren/travis-got) - Got 便利包，与Travis API交互
+- [graphql-got](https://github.com/kevva/graphql-got) - Got 便利包，与GraphQL API交互
+- [GotQL](https://github.com/khaosdoctor/gotql) - Got 便利包，与GraphQL API交互, 但是使用JSON解析替代字符串
 
 ## Maintainers
 
 | [![Sindre Sorhus](https://github.com/sindresorhus.png?size=100)](https://sindresorhus.com) | [![Vsevolod Strukchinsky](https://github.com/floatdrop.png?size=100)](https://github.com/floatdrop) | [![Alexander Tesfamichael](https://github.com/AlexTes.png?size=100)](https://github.com/AlexTes) | [![Luke Childs](https://github.com/lukechilds.png?size=100)](https://github.com/lukechilds) | [![Szymon Marczak](https://github.com/szmarczak.png?size=100)](https://github.com/szmarczak) | [![Brandon Smith](https://github.com/brandon93s.png?size=100)](https://github.com/brandon93s) |
 | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [辛德罗索罗斯](https://sindresorhus.com) | [维索沃](https://github.com/floatdrop) | [亚力山大特斯法米克尔](https://alextes.me) | [卢克儿童](https://github.com/lukechilds) | [西蒙马尔库](https://github.com/szmarczak) | [布兰登·史密斯](https://github.com/brandon93s) |
+| [Sindre Sorhus](https://sindresorhus.com) | [Vsevolod Strukchinsky](https://github.com/floatdrop) | [Alexander Tesfamichael](https://alextes.me) | [Luke Childs](https://github.com/lukechilds) | [Szymon Marczak](https://github.com/szmarczak) | [Brandon Smith](https://github.com/brandon93s) |
 
 ## License
 

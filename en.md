@@ -731,6 +731,7 @@ The promise returned by Got has a [`.cancel()`](https://github.com/sindresorhus/
 ```
 
 <a name="cache-adapters"></a>
+
 ## Cache
 
 Got implements [RFC 7234](http://httpwg.org/specs/rfc7234.html) compliant HTTP caching which works out of the box in-memory and is easily pluggable with a wide range of storage adapters. Fresh cache entries are served directly from the cache, and stale cache entries are revalidated with `If-None-Match`/`If-Modified-Since` headers. You can read more about the underlying cache behavior in the [`cacheable-request` documentation](https://github.com/lukechilds/cacheable-request).
