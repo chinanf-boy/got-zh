@@ -141,7 +141,7 @@ fs.createReadStream('index.html').pipe(got.stream.post('sindresorhus.com'));
 
 
 参数 | 
----|---
+---|
 [url](#url) |
 [options](#options) |
 
@@ -161,7 +161,7 @@ fs.createReadStream('index.html').pipe(got.stream.post('sindresorhus.com'));
 类型: | `Object`
 ---|---
 
-参数 |> [Streams](#streams) [baseUrl](#baseurl) [headers](#headers) [stream](#stream) [body](#body) [cookieJar](#cookiejar) [encoding](#encoding) [form](#form) [json](#json) [query](#query) [timeout](#timeout) [retry](#retry) [followRedirect](#followredirect) [decompress](#decompress) [cache](#cache) [request](#request) [useElectronNet](#useelectronnet) [throwHttpErrors](#throwhttperrors) [agent](#agent) [hooks](#hooks) [hooks.beforeRequest](#hooks.beforerequest) [hooks.beforeRedirect](#hooks.beforeredirect) [hooks.beforeRetry](#hooks.beforeretry) [hooks.afterResponse](#hooks.afterresponse)
+参数 |> [Streams](#streams) / [baseUrl](#baseurl) / [headers](#headers) / [stream](#stream) / [body](#body) / [cookieJar](#cookiejar) / [encoding](#encoding) / [form](#form) / [json](#json) / [query](#query) / [timeout](#timeout) / [retry](#retry) / [followRedirect](#followredirect) / [decompress](#decompress) / [cache](#cache) / [request](#request) / [useElectronNet](#useelectronnet) / [throwHttpErrors](#throwhttperrors) / [agent](#agent) / [hooks](#hooks)
 
 任何一个[`https.request`](https://nodejs.org/api/https.html#https_https_request_options_callback)的选项.
 
@@ -533,14 +533,7 @@ const instance = got.extend({
 
 响应对象通常是一个[Node.js HTTP响应流](https://nodejs.org/api/http.html#http_class_http_incomingmessage)但是,如果从缓存返回，那它会是一个[类似响应的对象](https://github.com/lukechilds/responselike)和行为方式相同.
 
-**参数** |>
-[body](#body-1)
-[url](#url-1)
-[requestUrl](#requesturl)
-[timings](#timings)
-[fromCache](#fromcache)
-[redirectUrls](#redirecturls)
-[retryCount](#retrycount)
+**参数** |> [body](#body-1) /  [url](#url-1) /  [requestUrl](#requesturl) /  [timings](#timings) /  [fromCache](#fromcache) /  [redirectUrls](#redirecturls) /  [retryCount](#retrycount) / 
 
 
 
